@@ -1,4 +1,4 @@
-// import AddNewRecord from '@/components/AddNewRecord';
+import AddNewRecord from '@/components/AddNewRecord';
 // import AverageSleep from '@/components/AverageSleep';
 // import BestWorstSleep from '@/components/BestWorstSleep';
 import Guest from '@/components/Guest';
@@ -50,7 +50,7 @@ export default async function HomePage() {
             </div>
           </div>
           {/* Placeholder for AddSleepRecord */}
-          {/* <AddNewRecord /> */}
+          <AddNewRecord />
         </div>
 
         {/* Right Column */}

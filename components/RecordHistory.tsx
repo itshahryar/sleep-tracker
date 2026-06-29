@@ -49,7 +49,7 @@ const RecordHistory = async () => {
             Sleep History
           </h3>
           <p className="text-xs text-slate-500">
-            Manage your records
+            Track & Manage your sleep records
           </p>
         </div>
       </div>

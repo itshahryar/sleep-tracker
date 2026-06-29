@@ -3,7 +3,6 @@ import AverageSleep from '@/components/AverageSleep';
 import BestWorstSleep from '@/components/BestWorstSleep';
 import Guest from '@/components/Guest';
 import RecordChart from '@/components/RecordChart';
-import RecordHistory from '@/components/RecordHistory';
 import { currentUser } from '@clerk/nextjs/server';
 
 export default async function HomePage() {
@@ -12,58 +11,54 @@ export default async function HomePage() {
     return <Guest />;
   }
   return (
-    <main className='bg-gray-100 text-gray-800 font-sans min-h-screen'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-8'>
-        {/* Left Column */}
-        <div className='space-y-6'>
-          <div className='bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row items-center sm:items-start gap-6'>
-            {/* User Image */}
-            <img
-              src={user.imageUrl}
-              alt={`${user.firstName}&#39;s profile`}
-              className='w-24 h-24 rounded-full border border-gray-300 shadow-md'
-            />
+    <main className="page-bg min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+        {/* Welcome Card */}
+        <div className="card-base p-5">
+          <div className="flex items-center gap-4">
+            <div className="relative shrink-0">
+              <img
+                src={user.imageUrl}
+                alt={`${user.firstName}'s profile`}
+                className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm"
+              />
+              <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full" />
+            </div>
 
-            {/* User Details */}
-            <div className='flex-1'>
-              <h2 className='text-2xl md:text-3xl font-bold text-purple-600 mb-2'>
-                Welcome Back, {user.firstName} 👋
-              </h2>
-              <p className='text-gray-600 mb-4'>
-                Here&#39;s a quick overview of your recent sleep activity. Stay
-                on top of your data insights and manage your tasks efficiently!
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-slate-500 mb-0.5">
+                Member since {new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
               </p>
-              <div className='space-y-2'>
-                <p className='text-gray-600'>
-                  <span className='font-semibold text-gray-800'>Joined:</span>{' '}
-                  {new Date(user.createdAt).toLocaleDateString()}
-                </p>
-                <p className='text-gray-600'>
-                  <span className='font-semibold text-gray-800'>
-                    Last Active:
-                  </span>{' '}
-                  {user.lastActiveAt
-                    ? new Date(user.lastActiveAt).toLocaleString()
-                    : 'N/A'}
-                </p>
-              </div>
+              <h2 className="text-lg font-semibold text-slate-800">
+                Welcome back, {user.firstName}
+              </h2>
+            </div>
+
+            <div className="hidden sm:flex items-center gap-2 bg-slate-50 rounded-lg px-3 py-2 border border-slate-200">
+              <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-xs text-slate-600">
+                {user.lastActiveAt
+                  ? new Date(user.lastActiveAt).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
+                  : 'N/A'}
+              </span>
             </div>
           </div>
-          {/* Placeholder for AddSleepRecord */}
-          <AddNewRecord />
         </div>
 
-        {/* Right Column */}
-        <div className='space-y-6'>
-          {/* Placeholder for RecordStats, RecentRecord, and Insights */}
-          <RecordChart />
-          <AverageSleep />
-          <BestWorstSleep />
+        {/* Grid for other components */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="space-y-5">
+            <AddNewRecord />
+            <RecordChart />
+          </div>
+
+          <div className="space-y-5">
+            <AverageSleep />
+            <BestWorstSleep />
+          </div>
         </div>
-      </div>
-      {/* Placeholder for SleepHistory */}
-      <div className='max-w-7xl mx-auto'>
-        <RecordHistory />
       </div>
     </main>
   );

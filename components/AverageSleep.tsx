@@ -22,7 +22,7 @@ const AverageSleep = async () => {
             </svg>
           </div>
           <h3 className="text-xs font-medium text-slate-600">
-            Average Sleep (Last Month)
+            Average Sleep (Monthly)
           </h3>
         </div>
         <div className="flex items-baseline gap-1.5">
